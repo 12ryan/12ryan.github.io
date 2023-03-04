@@ -1,0 +1,69 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>全选反选问题</title>
+<!--引入jquery的js库-->
+<script src="js/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+	//让所有item的状态和全选保持一致
+    $(function(){
+	    $("input[name='item']").attr("checked", true); 
+    });
+
+	//全选
+	function checkAll(e){
+		if($(e).attr("checked"))
+		{
+			$("input[name='item']").attr("checked", true);
+		    $("input[id='all2']").attr("checked", false);
+		}
+		
+	}
+    //反选
+    function check(e){
+	    if($(e).attr("checked"))
+	    {
+		    $("input[name='item']").each(function () {
+                $(this).attr("checked", !$(this).attr("checked"));
+            });
+	        $("input[id='all1']").attr("checked", false);
+	    }
+    }
+
+    function getSum(){
+        var sum = 0;
+        var arr = [];
+        $("input[name='item']").each(function(){
+            if(this.checked){
+            arr.push(Number($(this).val()));
+           }
+        });
+        for(var i = 0; i<arr.length; i++)
+        {
+	        sum += arr[i];
+        }
+        alert(sum);
+    }
+
+</script>
+
+
+-->
+</head>
+
+<body>
+<div>商品列表</div>
+<input type="checkbox" name="item" value="3000" />笔记本3000元<br />
+<input type="checkbox" name="item" value="2500"/>HTC手机2500<br />
+<input type="checkbox" name="item" value="8000" />苹果电脑8000<br />
+<input type="checkbox" name="item" value="1500" />IPAD1500<br />
+<input type="checkbox" name="item" value="400" />玩具汽车400<br />
+
+<input type="checkbox" id="all1" name="all" onclick="checkAll(this)"/>全选<br />
+<input type="checkbox" id="all2" name="all" onclick="check(this)"/>反选<br />
+
+<input type="button" value="总金额" onclick="getSum()" /><span id="sumId"></span>
+</body>
+</html>
